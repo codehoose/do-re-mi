@@ -1,0 +1,21 @@
+
+{
+	"notes": [
+		{
+			"name": "do",
+			"duration": "0.1456"
+		},
+		{
+			"name": "re",
+			"duration":"0.1567"
+		},
+		{
+			"name": "mi",
+			"duration":"0.1645"
+		},
+		{
+			"name": "do",
+			"duration": 0.1545
+		}
+	]
+}

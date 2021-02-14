@@ -1,0 +1,34 @@
+
+
+{
+	"notes": [
+		{
+			"name": "mi",
+			"duration": 0.5
+		},
+		{
+			"name": "re",
+			"duration":0.25
+		},
+		{
+			"name": "do",
+			"duration":0.25
+		},
+		{
+			"name": "re",
+			"duration": 0.25
+		},
+				{
+			"name": "mi",
+			"duration": 0.25
+		},
+				{
+			"name": "mi",
+			"duration": 0.25
+		},
+				{
+			"name": "mi",
+			"duration": 0.25
+		}
+	]
+}

@@ -418,6 +418,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7b373bd4ba757f47ad324c0dfd0e85d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  noteSequence: {fileID: 4900000, guid: 331233a16c89f72419c859c2499a141e, type: 3}
+  sampleRate: 44100
+  _frequencies: b8010000ee0100000b0200004b02000093020000ba0200001003000070030000
+  _frequenceNames:
+  - do
+  - re
+  - mi
+  - fa
+  - so
+  - la
+  - ti
+  - do'
 --- !u!114 &703607295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -462,7 +474,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 703607294}
-        m_MethodName: PlayClip
+        m_MethodName: PlayNotes
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

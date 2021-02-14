@@ -1,26 +1,63 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlaySequence : MonoBehaviour
 {
-    private AudioClip _clip;
+    private Dictionary<string, AudioClip> _clips;
+
+    public TextAsset noteSequence;
+
+    public int sampleRate = 44100;
+
+    public int[] _frequencies = new int[]
+    {
+        440, 494, 523, 587, 659, 698, 784, 880
+    };
+
+    public string[] _frequenceNames = new string[]
+    {
+        "do", "re", "mi", "fa", "so", "la", "ti", "do'"
+    };
 
     void Start()
     {
-        int samplerate = 44100;
-        float frequency = 440;
+        _clips = new Dictionary<string, AudioClip>();
 
-        _clip = AudioClip.Create(frequency.ToString(), samplerate, 1, samplerate, false);
-        CreateClip(_clip, samplerate, frequency);
-
-        var audioSource = GetComponent<AudioSource>();
-        audioSource.clip = _clip;
-        audioSource.loop = true;
-        audioSource.Play();
+        for (int i = 0; i < _frequencies.Length; i++)
+        {
+            string frequencyName = _frequenceNames[i];
+            AudioClip clip = CreateClip(frequencyName, sampleRate, _frequencies[i]);
+            _clips.Add(frequencyName, clip);
+        }
     }
 
-    private void CreateClip(AudioClip clip, int samplerate, float frequency)
+    public void PlayNotes()
     {
+        string json = noteSequence.text;
+        var sequence = JsonUtility.FromJson<NoteSequence>(json);
+
+        StartCoroutine(PlayTheSequence(sequence));
+    }
+
+    private IEnumerator PlayTheSequence(NoteSequence sequence)
+    {
+        var audioSource = GetComponent<AudioSource>();
+
+        for (int i = 0; i < sequence.notes.Length; i++)
+        {
+            var note = sequence.notes[i];
+            var clip = _clips[note.name];
+            audioSource.PlayOneShot(clip);
+            yield return new WaitForSeconds(note.duration);
+            audioSource.Stop();
+        }
+    }
+
+    private AudioClip CreateClip(string clipName, int samplerate, float frequency)
+    {
+        var clip = AudioClip.Create(clipName, samplerate, 1, samplerate, false);
+
         var size = clip.frequency * (int)Mathf.Ceil(clip.length);
         float[] data = new float[size];
 
@@ -32,5 +69,6 @@ public class PlaySequence : MonoBehaviour
         }
 
         clip.SetData(data, 0);
+        return clip;
     }
 }
