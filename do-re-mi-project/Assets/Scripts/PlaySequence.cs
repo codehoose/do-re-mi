@@ -12,6 +12,9 @@ public class PlaySequence : MonoBehaviour
 
     public int[] _frequencies = new int[]
     {
+    //  A    B    C    D    E    F    G    A'
+    //  DO   RE   MI   FA   SO   LA   TI   DO
+    // See: https://www.audiology.org/sites/default/files/ChasinConversionChart.pdf
         440, 494, 523, 587, 659, 698, 784, 880
     };
 
